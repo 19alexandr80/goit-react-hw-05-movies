@@ -6,7 +6,7 @@ const api = new NewApi();
 
 export const App = () => {
   const [list, setList] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [status, setStatus] = useState(false);
   useEffect(() => {
     const getApi = async () => {
@@ -27,6 +27,7 @@ export const App = () => {
     getApi();
   }, []);
   console.log(list);
+  console.log(status);
   // const fun = async () => {
   //   try {
   //     // const data = await api.getUser();
