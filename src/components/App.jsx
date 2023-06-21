@@ -12,7 +12,7 @@ export const App = () => {
     const getApi = async () => {
       setStatus(true);
       try {
-        const data = await api.getUser(page);
+        const data = await api.getUser();
 
         setList(prev => {
           return [...prev, ...data.results];
