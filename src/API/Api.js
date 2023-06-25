@@ -15,7 +15,7 @@ const keyApi = '6d070ee2b82df1d970d23eca62ef69da';
 // };
 //======================================================================================
 export class NewApi {
-  async getUser(page = 1) {
+  async getAll(page = 1) {
     try {
       const response = await axios.get(
         `/trending/all/day?language=en-US/&api_key=${keyApi}&page=${page}`
