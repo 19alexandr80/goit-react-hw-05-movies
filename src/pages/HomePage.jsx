@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { NewApi } from 'API/Api';
 
@@ -10,8 +10,8 @@ const HomePage = () => {
   // const [page, setPage] = useState(1);
   // const [status, setStatus] = useState(false);
 
-  const params = useParams();
-  console.log('params', params);
+  // const params = useParams();
+  // console.log('params', params);
 
   useEffect(() => {
     const getApi = async () => {
@@ -37,17 +37,20 @@ const HomePage = () => {
   // console.log(status);
   // console.log(page);
   return (
-    <ul>
-      {list.map(film => {
-        return (
-          <li key={film.id}>
-            <Link to={`${film.id}`}>
-              {film.original_name ? film.original_name : film.original_title}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul>
+        {list.map(film => {
+          return (
+            <li key={film.id}>
+              <Link to={`${film.id}`}>
+                {film.original_name ? film.original_name : film.original_title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <button type="button">Load more</button>
+    </>
   );
 };
 export default HomePage;

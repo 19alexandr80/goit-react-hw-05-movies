@@ -31,6 +31,17 @@ export class NewApi {
     }
   }
 
+  async getFilmId(id) {
+    try {
+      const response = await axios.get(
+        `/movie/${id}?language=en-US/&api_key=${keyApi}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   getAmountOfElements() {
     return this.amountOfElements;
   }
