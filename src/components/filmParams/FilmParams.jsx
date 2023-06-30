@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import def from 'image/default.png';
 
 import { NewApi } from 'API/Api';
@@ -8,6 +8,8 @@ const api = new NewApi();
 const FilmePage = () => {
   const [film, setFilm] = useState({});
   const params = useParams();
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
   useEffect(() => {
     const getApi = async () => {
       // setStatus(true);
@@ -29,7 +31,7 @@ const FilmePage = () => {
   }, [params.movieId]);
   return (
     <>
-      <button type="button">Button</button>
+      <Link to={backLink.current}>Button</Link>
       <h2>{film.original_name ? film.original_name : film.original_title}</h2>
       <img
         src={

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { NewApi } from 'API/Api';
@@ -8,12 +8,15 @@ const api = new NewApi();
 const Movies = () => {
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const inputChange = e => {
-    setSearchParams({ filmName: e.target.value });
+    const paramInput =
+      e.target.value !== '' ? { filmName: e.target.value } : {};
+    setSearchParams(paramInput);
   };
+
   const formSubmit = async e => {
     e.preventDefault();
-    setSearchParams({ filmName: '' });
     try {
       const data = await api.getMovies(searchParams.get('filmName'));
       if (!data) {
@@ -30,6 +33,7 @@ const Movies = () => {
       return;
     }
   };
+
   return (
     <>
       <form onSubmit={formSubmit}>
@@ -46,7 +50,7 @@ const Movies = () => {
         {films.map(film => {
           return (
             <li key={film.id}>
-              <Link to={`/movies/${film.id}`}>
+              <Link to={`/movies/${film.id}`} state={{ from: location }}>
                 {film.original_title ? film.original_title : film.title}
               </Link>
             </li>
