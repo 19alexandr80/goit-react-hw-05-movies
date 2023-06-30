@@ -27,24 +27,28 @@ export const Cast = () => {
   }, [params.movieId]);
   return (
     <div>
-      <ul>
-        {cast.map(cast => {
-          return (
-            <li key={`${cast.id}`}>
-              <h3>{cast.name}</h3>
-              <img
-                src={
-                  cast.profile_path
-                    ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
-                    : ''
-                }
-                alt=""
-                width="120"
-              />
-            </li>
-          );
-        })}
-      </ul>
+      {cast.length !== 0 ? (
+        <ul>
+          {cast.map(cast => {
+            return (
+              <li key={`${cast.id}`}>
+                <h3>{cast.name}</h3>
+                <img
+                  src={
+                    cast.profile_path
+                      ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
+                      : ''
+                  }
+                  alt=""
+                  width="120"
+                />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <h3>Sorry no content yet</h3>
+      )}
     </div>
   );
 };
