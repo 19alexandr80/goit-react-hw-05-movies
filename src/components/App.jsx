@@ -1,13 +1,14 @@
-// import { useState, useEffect } from 'react';
 import { Routes, NavLink, Route } from 'react-router-dom';
 
 import HomePage from 'pages/HomePage';
 import FilmePage from 'components/filmParams/FilmParams';
 import Movies from 'pages/Movies';
+import { Cast } from 'components/Cast/Cast';
+import { Reviews } from 'components/Reviews/Reviews';
 
 export const App = () => {
   return (
-    <div>
+    <>
       <nav>
         <ul>
           <li>
@@ -21,11 +22,11 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/:movieId" element={<FilmePage />}>
-          <Route path="cast" element={<div>CAST</div>} />
-          <Route path="reviews" element={<div>REVIEWS</div>} />
+        <Route path="/movies/:movieId" element={<FilmePage />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 };

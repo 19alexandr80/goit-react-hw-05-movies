@@ -42,10 +42,34 @@ export class NewApi {
     }
   }
 
-  getAmountOfElements() {
-    return this.amountOfElements;
+  async getCast(id) {
+    try {
+      const response = await axios.get(
+        `/movie/${id}/credits?language=en-US/&api_key=${keyApi}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
-  getTotalHits() {
-    return this.totalHits;
+  async getReviews(id, page = 1) {
+    try {
+      const response = await axios.get(
+        `/movie/${id}/reviews?language=en-US/&api_key=${keyApi}&page=${page}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getMovies(name) {
+    try {
+      const response = await axios.get(
+        `/search/movie?query=${name}&include_adult=false&language=en-US/&api_key=${keyApi}&page=1`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
