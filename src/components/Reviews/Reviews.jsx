@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { NewApi } from 'API/Api';
 const api = new NewApi();
 
-export const Reviews = () => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const params = useParams();
   useEffect(() => {
@@ -44,3 +44,4 @@ export const Reviews = () => {
     </>
   );
 };
+export default Reviews;

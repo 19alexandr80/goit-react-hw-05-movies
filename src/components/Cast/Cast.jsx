@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { NewApi } from 'API/Api';
 const api = new NewApi();
 
-export const Cast = () => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const params = useParams();
   useEffect(() => {
@@ -52,3 +52,4 @@ export const Cast = () => {
     </div>
   );
 };
+export default Cast;
