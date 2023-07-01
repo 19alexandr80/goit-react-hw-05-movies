@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,29 @@ const Movies = () => {
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+
+  useEffect(() => {
+    if (searchParams.get('filmName')) {
+      apiGet();
+    }
+  }, []);
+
+  const apiGet = async () => {
+    try {
+      const data = await api.getMovies(searchParams.get('filmName'));
+      if (!data) {
+        alert('sorry no information yet');
+        return;
+      }
+      setFilms([...data.results]);
+    } catch (error) {
+      console.error(error.messeng);
+    } finally {
+      // setStatus(false);
+      return;
+    }
+  };
+
   const inputChange = e => {
     const paramInput =
       e.target.value !== '' ? { filmName: e.target.value } : {};
@@ -17,21 +40,22 @@ const Movies = () => {
 
   const formSubmit = async e => {
     e.preventDefault();
-    try {
-      const data = await api.getMovies(searchParams.get('filmName'));
-      if (!data) {
-        alert('sorry no information yet');
-        return;
-      }
-      setFilms(prev => {
-        return [...prev, ...data.results];
-      });
-    } catch (error) {
-      console.error(error.messeng);
-    } finally {
-      // setStatus(false);
-      return;
-    }
+    apiGet();
+    // try {
+    //   const data = await api.getMovies(searchParams.get('filmName'));
+    //   if (!data) {
+    //     alert('sorry no information yet');
+    //     return;
+    //   }
+    //   setFilms(prev => {
+    //     return [...prev, ...data.results];
+    //   });
+    // } catch (error) {
+    //   console.error(error.messeng);
+    // } finally {
+    //   // setStatus(false);
+    //   return;
+    // }
   };
 
   return (
