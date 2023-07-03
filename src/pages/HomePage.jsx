@@ -16,9 +16,7 @@ const HomePage = () => {
       try {
         const data = await api.getAll();
 
-        setList(prev => {
-          return [...prev, ...data.results];
-        });
+        setList([...data.results]);
       } catch (error) {
         console.error(error.messeng);
       } finally {

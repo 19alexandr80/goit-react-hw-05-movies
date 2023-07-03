@@ -7,45 +7,31 @@ const api = new NewApi();
 
 const Movies = () => {
   const [films, setFilms] = useState([]);
+  const [filmsName, setFilmsName] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-
+  if (searchParams.get('filmName') && filmsName === '') {
+    setFilmsName(searchParams.get('filmName'));
+  }
+  console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
   useEffect(() => {
-    if (searchParams.get('filmName')) {
-      const apiGet = async () => {
-        try {
-          const data = await api.getMovies(searchParams.get('filmName'));
-          if (!data) {
-            alert('sorry no information yet');
-            return;
-          }
-          setFilms([...data.results]);
-        } catch (error) {
-          console.error(error.messeng);
-        } finally {
-          // setStatus(false);
+    const apiGet = async () => {
+      try {
+        const data = await api.getMovies(filmsName);
+        if (!data) {
+          alert('sorry no information yet');
           return;
         }
-      };
-      apiGet();
-    }
-  }, [searchParams]);
-
-  // const apiGet = async () => {
-  //   try {
-  //     const data = await api.getMovies(searchParams.get('filmName'));
-  //     if (!data) {
-  //       alert('sorry no information yet');
-  //       return;
-  //     }
-  //     setFilms([...data.results]);
-  //   } catch (error) {
-  //     console.error(error.messeng);
-  //   } finally {
-  //     // setStatus(false);
-  //     return;
-  //   }
-  // };
+        setFilms([...data.results]);
+      } catch (error) {
+        console.error(error.messeng);
+      } finally {
+        // setStatus(false);
+        return;
+      }
+    };
+    apiGet();
+  }, [filmsName]);
 
   const inputChange = e => {
     const paramInput =
@@ -53,24 +39,9 @@ const Movies = () => {
     setSearchParams(paramInput);
   };
 
-  const formSubmit = async e => {
+  const formSubmit = e => {
     e.preventDefault();
-    // apiGet();
-    try {
-      const data = await api.getMovies(searchParams.get('filmName'));
-      if (!data) {
-        alert('sorry no information yet');
-        return;
-      }
-      setFilms(prev => {
-        return [...prev, ...data.results];
-      });
-    } catch (error) {
-      console.error(error.messeng);
-    } finally {
-      // setStatus(false);
-      return;
-    }
+    setFilmsName(searchParams.get('filmName'));
   };
 
   return (
