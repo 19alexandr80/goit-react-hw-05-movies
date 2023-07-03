@@ -12,10 +12,14 @@ export const Header = () => {
       <nav>
         <ListHeaderStyled>
           <CategoryStyled>
-            <NavLink to="/">Home page</NavLink>
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
+              Home page
+            </NavLink>
           </CategoryStyled>
           <CategoryStyled>
-            <NavLink to="/movies">Movies</NavLink>
+            <NavLink to="/movies" style={{ textDecoration: 'none' }}>
+              Movies
+            </NavLink>
           </CategoryStyled>
         </ListHeaderStyled>
       </nav>

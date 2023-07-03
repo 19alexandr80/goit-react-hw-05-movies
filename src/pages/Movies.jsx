@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
+import { MoviesList } from 'components/MoviesComp/MoviesList';
+import { MoviesForm } from 'components/MoviesComp/MoviesForm';
+
+import { ContainerStyled } from 'components/styled/CommonStyles';
 
 import { NewApi } from 'API/Api';
 const api = new NewApi();
@@ -46,29 +50,15 @@ const Movies = () => {
   };
 
   return (
-    <>
-      <form onSubmit={formSubmit}>
-        <button>Find</button>
-        <input
-          type="text"
-          onChange={inputChange}
-          value={
-            searchParams.get('filmName') ? searchParams.get('filmName') : ''
-          }
-        />
-      </form>
-      <ul>
-        {films.map(film => {
-          return (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`} state={{ from: location }}>
-                {film.original_title ? film.original_title : film.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+    <ContainerStyled>
+      <MoviesForm
+        formSubmit={formSubmit}
+        inputChange={inputChange}
+        searchParams={searchParams.get('filmName')}
+      />
+
+      {films.length !== 0 && <MoviesList location={location} films={films} />}
+    </ContainerStyled>
   );
 };
 export default Movies;

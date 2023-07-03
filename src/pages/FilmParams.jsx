@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
-import def from 'image/default.png';
+// import def from 'image/default.png';
+
+import { FilmCommp } from 'components/FilmCommp/FilmCommp';
+
+import { ContainerStyled } from 'components/styled/CommonStyles';
 
 import { NewApi } from 'API/Api';
 const api = new NewApi();
@@ -29,30 +33,17 @@ const FilmePage = () => {
     };
     getApi();
   }, [params.movieId]);
-  return (
-    <>
-      <Link to={backLink.current}>Button</Link>
-      <h2>{film.original_name ? film.original_name : film.original_title}</h2>
-      <img
-        src={
-          film.backdrop_path
-            ? `https://image.tmdb.org/t/p/w500${film.backdrop_path}`
-            : def
-        }
-        alt=""
-        width="370"
-      />
 
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
+  return (
+    <ContainerStyled>
+      <div>
+        <Link to={backLink.current} style={{ textDecoration: 'none' }}>
+          Go back
+        </Link>
+      </div>
+      <FilmCommp film={film} />
       <Outlet />
-    </>
+    </ContainerStyled>
   );
 };
 export default FilmePage;
