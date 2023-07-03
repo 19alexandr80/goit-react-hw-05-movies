@@ -12,25 +12,42 @@ const Movies = () => {
 
   useEffect(() => {
     if (searchParams.get('filmName')) {
+      console.log(films);
+      const apiGet = async () => {
+        try {
+          const data = await api.getMovies(searchParams.get('filmName'));
+          if (!data) {
+            alert('sorry no information yet');
+            return;
+          }
+          setFilms([...data.results]);
+        } catch (error) {
+          console.error(error.messeng);
+        } finally {
+          // setStatus(false);
+          return;
+        }
+      };
       apiGet();
     }
   }, []);
+  console.log('lllllllllllllllllllllll');
 
-  const apiGet = async () => {
-    try {
-      const data = await api.getMovies(searchParams.get('filmName'));
-      if (!data) {
-        alert('sorry no information yet');
-        return;
-      }
-      setFilms([...data.results]);
-    } catch (error) {
-      console.error(error.messeng);
-    } finally {
-      // setStatus(false);
-      return;
-    }
-  };
+  // const apiGet = async () => {
+  //   try {
+  //     const data = await api.getMovies(searchParams.get('filmName'));
+  //     if (!data) {
+  //       alert('sorry no information yet');
+  //       return;
+  //     }
+  //     setFilms([...data.results]);
+  //   } catch (error) {
+  //     console.error(error.messeng);
+  //   } finally {
+  //     // setStatus(false);
+  //     return;
+  //   }
+  // };
 
   const inputChange = e => {
     const paramInput =
@@ -40,22 +57,22 @@ const Movies = () => {
 
   const formSubmit = async e => {
     e.preventDefault();
-    apiGet();
-    // try {
-    //   const data = await api.getMovies(searchParams.get('filmName'));
-    //   if (!data) {
-    //     alert('sorry no information yet');
-    //     return;
-    //   }
-    //   setFilms(prev => {
-    //     return [...prev, ...data.results];
-    //   });
-    // } catch (error) {
-    //   console.error(error.messeng);
-    // } finally {
-    //   // setStatus(false);
-    //   return;
-    // }
+    // apiGet();
+    try {
+      const data = await api.getMovies(searchParams.get('filmName'));
+      if (!data) {
+        alert('sorry no information yet');
+        return;
+      }
+      setFilms(prev => {
+        return [...prev, ...data.results];
+      });
+    } catch (error) {
+      console.error(error.messeng);
+    } finally {
+      // setStatus(false);
+      return;
+    }
   };
 
   return (
