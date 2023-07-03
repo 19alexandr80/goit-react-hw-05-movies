@@ -20,7 +20,6 @@ const Movies = () => {
             return;
           }
           setFilms([...data.results]);
-          console.log(films);
         } catch (error) {
           console.error(error.messeng);
         } finally {
@@ -30,8 +29,7 @@ const Movies = () => {
       };
       apiGet();
     }
-  }, []);
-  console.log('lllllllllllllllllllllll');
+  }, [searchParams]);
 
   // const apiGet = async () => {
   //   try {
