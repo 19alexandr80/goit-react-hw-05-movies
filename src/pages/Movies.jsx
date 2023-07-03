@@ -30,7 +30,7 @@ const Movies = () => {
       };
       apiGet();
     }
-  });
+  }, []);
   console.log('lllllllllllllllllllllll');
 
   // const apiGet = async () => {
