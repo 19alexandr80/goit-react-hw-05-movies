@@ -12,7 +12,6 @@ const Movies = () => {
 
   useEffect(() => {
     if (searchParams.get('filmName')) {
-      console.log(films);
       const apiGet = async () => {
         try {
           const data = await api.getMovies(searchParams.get('filmName'));
@@ -21,6 +20,7 @@ const Movies = () => {
             return;
           }
           setFilms([...data.results]);
+          console.log(films);
         } catch (error) {
           console.error(error.messeng);
         } finally {
