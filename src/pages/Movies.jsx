@@ -8,12 +8,13 @@ const api = new NewApi();
 const Movies = () => {
   const [films, setFilms] = useState([]);
   const [filmsName, setFilmsName] = useState('');
+  const [status, setStatus] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  if (searchParams.get('filmName') && filmsName === '') {
+  if (searchParams.get('filmName') && filmsName === '' && status) {
     setFilmsName(searchParams.get('filmName'));
   }
-  console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+
   useEffect(() => {
     const apiGet = async () => {
       try {
@@ -26,7 +27,6 @@ const Movies = () => {
       } catch (error) {
         console.error(error.messeng);
       } finally {
-        // setStatus(false);
         return;
       }
     };
@@ -34,6 +34,7 @@ const Movies = () => {
   }, [filmsName]);
 
   const inputChange = e => {
+    setStatus(false);
     const paramInput =
       e.target.value !== '' ? { filmName: e.target.value } : {};
     setSearchParams(paramInput);

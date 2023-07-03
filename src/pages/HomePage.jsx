@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+import { HomeList } from 'components/HomeList/HomeList';
 
 import { NewApi } from 'API/Api';
 
@@ -27,20 +29,6 @@ const HomePage = () => {
     getApi();
   }, []);
 
-  return (
-    <>
-      <ul>
-        {list.map(film => {
-          return (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`} state={{ from: location }}>
-                {film.original_name ? film.original_name : film.original_title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </>
-  );
+  return <HomeList list={list} location={location} />;
 };
 export default HomePage;
