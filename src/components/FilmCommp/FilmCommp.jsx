@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import def from 'image/default.png';
+import PropTypes from 'prop-types';
 
 import {
   FilmContainerStyled,
@@ -32,7 +33,7 @@ export const FilmCommp = ({ film }) => {
             <ParagrafStyled>
               {film.genres ? (
                 film.genres.map(g => {
-                  return <span key={g.id}> {g.name} </span>;
+                  return <span key={`${g.id}`}> {g.name} </span>;
                 })
               ) : (
                 <span>Genres</span>
@@ -60,4 +61,19 @@ export const FilmCommp = ({ film }) => {
       </ListSubCategoriesStyled>
     </>
   );
+};
+
+FilmCommp.propTypes = {
+  film: PropTypes.shape({
+    backdrop_path: PropTypes.string,
+    original_name: PropTypes.number,
+    original_title: PropTypes.string,
+    overview: PropTypes.string,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ),
+  }).isRequired,
 };

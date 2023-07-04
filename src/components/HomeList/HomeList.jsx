@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { FilmStyled } from 'components/HomeList/HomeListStyled.styled';
 import { ContainerStyled, ListStyled } from 'components/styled/CommonStyles';
 
 export const HomeList = ({ list, location }) => {
-  //   console.log(list);
-  //   console.log(location);
   return (
     <ContainerStyled>
       <ListStyled>
@@ -22,4 +20,14 @@ export const HomeList = ({ list, location }) => {
       </ListStyled>
     </ContainerStyled>
   );
+};
+HomeList.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_name: PropTypes.string,
+      original_title: PropTypes.string,
+    }).isRequired
+  ).isRequired,
+  location: PropTypes.object.isRequired,
 };

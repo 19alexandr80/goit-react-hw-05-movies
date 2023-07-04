@@ -1,4 +1,5 @@
 import { FormStyled } from 'components/MoviesComp/MoviesStyled.styled';
+import PropTypes from 'prop-types';
 
 export const MoviesForm = ({ formSubmit, inputChange, searchParams }) => {
   return (
@@ -11,4 +12,10 @@ export const MoviesForm = ({ formSubmit, inputChange, searchParams }) => {
       />
     </FormStyled>
   );
+};
+
+MoviesForm.propTypes = {
+  searchParams: PropTypes.string,
+  inputChange: PropTypes.func.isRequired,
+  formSubmit: PropTypes.func.isRequired,
 };

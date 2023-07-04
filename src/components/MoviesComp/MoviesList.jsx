@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { ListStyled } from 'components/styled/CommonStyles';
 
@@ -16,4 +17,15 @@ export const MoviesList = ({ films, location }) => {
       })}
     </ListStyled>
   );
+};
+
+MoviesList.propTypes = {
+  films: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      original_title: PropTypes.string,
+    }).isRequired
+  ).isRequired,
+  location: PropTypes.object.isRequired,
 };
